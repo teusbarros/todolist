@@ -63,6 +63,14 @@ export default {
   mounted: function(){
     // this.time()
     // consumindo muita memória
+    if(localStorage.antigasTarefas){
+      this.tarefas = JSON.parse(localStorage.antigasTarefas);
+    }
+  },
+  watch:{
+    tarefas(newTarefas){
+      localStorage.antigasTarefas = JSON.stringify(newTarefas);
+    }
   }
 };
 </script>
