@@ -1,13 +1,13 @@
 <template>
   <div class="main-div" :id="id">
-    <span v-if="!isConclued">
+    <span class="tarefa" v-if="!isConclued">
       <input type="checkbox" @change="concluido" />
-      {{conteudo}}
+      <strong>{{conteudo}}</strong>
     </span>
-    <span v-else>
+    <span class="tarefa" v-else>
       <strike>
         <input type="checkbox" @change="concluido" checked />
-        {{conteudo}}
+        <strong>{{conteudo}}</strong>
       </strike>
       <f-icon icon="trash" @click="apagarTarefa" />
     </span>
@@ -18,21 +18,23 @@
 export default {
   data() {
     return {
-      isConclued: false,
+      isConclued: this.concluida,
     };
   },
   props: {
     id: String,
     conteudo: String,
+    concluida: Boolean
   },
   methods: {
     concluido: function () {
       this.isConclued = !this.isConclued;
+      this.$emit("concluirTarefa", { referencia: this.id });
     },
     apagarTarefa: function () {
       this.$emit("apagaTarefa", { referencia: this.id });
     },
-  },
+  }
 };
 </script>
 
@@ -48,7 +50,14 @@ p {
   padding-left: 30px;
   padding-right: 30px;
 }
-span {
+f-icon {
+  cursor: pointer;
+}
+strong{
+  cursor: move;
+
+}
+span.tarefa {
   background-color: #a3a3a3;
   height: 75px;
   min-width: 100%;
@@ -57,7 +66,7 @@ span {
   padding: 2%;
   font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-span:hover {
+span.tarefa:hover {
   background-color: #5d5d5d;
   height: 75px;
   min-width: 100%;
