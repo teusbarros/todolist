@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <Config></Config>
     <div id="todolist">
       <div id="header">
         <h1>TODO List</h1>
@@ -30,6 +31,7 @@
           @keyup="adicionar"
           maxlength="60"
         />
+        
       </div>
     </div>
   </div>
@@ -38,11 +40,13 @@
 <script>
 import Tarefa from "./components/Tarefa";
 import draggable from "vuedraggable";
+import Config from "./components/Configuracao";
 export default {
   name: "App",
   components: {
     Tarefa,
     draggable,
+    Config,
   },
   data() {
     return {
