@@ -7,7 +7,7 @@
         <hr />
       </div>
       <div id="tarefas">
-        <draggable v-model="tarefas" @start="drag=true" @end="onEnd">
+        <draggable v-model="tarefas" ghost-class="ghost" @start="drag=true" @end="onEnd">
           <transition-group type="transition" name="flip-list">
             <div :id="tarefa.id" v-for="tarefa in tarefas" :key="tarefa.id">
               <Tarefa
@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       tarefas: [],
+      tarefaField: "",
       timestamp: "",
       oldIndex: "",
       newIndex: "",
@@ -57,7 +58,7 @@ export default {
       if (event.keyCode === 13) {
         if (this.tarefaField.length > 1) {
           var data = Date.now().toString();
-          this.tarefas.push({
+          this.tarefas.unshift({
             id: data,
             conteudo: this.tarefaField,
             concluida: false,
@@ -134,10 +135,11 @@ export default {
 }
 #tarefas {
   margin: auto;
+  padding: 10px;
+  padding-right: 15px;
   height: 400px;
   overflow: auto;
   overflow-x: hidden;
-  padding-right: 15px;
 }
 #todolist {
   width: 500px;
@@ -166,5 +168,16 @@ body {
   padding: 0;
   text-align: center;
   background-color: #a3a3a3;
+}
+#tarefas .sortable-drag {
+  opacity: 0;
+}
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.ghost {
+  border-left: 10px solid #000;
+  box-shadow: 10px 10px 5px -1px rgb(0, 0, 0, 0.14);
+  opacity: 0.7;
 }
 </style>

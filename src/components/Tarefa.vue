@@ -1,16 +1,9 @@
 <template>
-  <div class="main-div" :id="id">
-    <span class="tarefa" v-if="!isConclued">
-      <input type="checkbox" @change="concluido" />
-      <strong>{{conteudo}}</strong>
-    </span>
-    <span class="tarefa" v-else>
-      <strike>
-        <input type="checkbox" @change="concluido" checked />
-        <strong>{{conteudo}}</strong>
-      </strike>
-      <f-icon icon="trash" @click="apagarTarefa" />
-    </span>
+  <div class="tarefa" :id="id">
+    <input class="aCheck" v-if="!isConclued" type="checkbox" @change="concluido" />
+    <input class="aCheck" v-else type="checkbox" @change="concluido" checked />
+    <strong>{{conteudo}}</strong>
+    <f-icon class="aIcon" v-if="isConclued" icon="trash" @click="apagarTarefa" />
   </div>
 </template>
 
@@ -24,7 +17,7 @@ export default {
   props: {
     id: String,
     conteudo: String,
-    concluida: Boolean
+    concluida: Boolean,
   },
   methods: {
     concluido: function () {
@@ -34,7 +27,7 @@ export default {
     apagarTarefa: function () {
       this.$emit("apagaTarefa", { referencia: this.id });
     },
-  }
+  },
 };
 </script>
 
@@ -50,33 +43,36 @@ p {
   padding-left: 30px;
   padding-right: 30px;
 }
-f-icon {
+.tarefa {
+  height: 35px;
+  width: 100%;
+  margin: auto;
+  margin-top: 5px;
+  padding: 4% 3px 3px 3px;
+  background-color: #a3a3a3;
+  vertical-align: middle;
+  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.tarefa:hover {
+  height: 35px;
+  width: 100%;
+  margin: auto;
+  margin-top: 5px;
+  padding: 4% 3px 3px 3px;
+
+  background-color: #5d5d5d;
+  vertical-align: middle;
+  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+input.aCheck {
+  float: left;
+}
+.aIcon {
+  float: right;
   cursor: pointer;
 }
-strong{
+strong {
   cursor: move;
-
-}
-span.tarefa {
-  background-color: #a3a3a3;
-  height: 75px;
-  min-width: 100%;
-  vertical-align: middle;
-  margin: 10px;
-  padding: 2%;
-  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-span.tarefa:hover {
-  background-color: #5d5d5d;
-  height: 75px;
-  min-width: 100%;
-  vertical-align: middle;
-  margin: 10px;
-  padding: 2%;
-  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.main-div {
-  margin-top: 25px;
-  text-align: center;
+  float: left;
 }
 </style>
