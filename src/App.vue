@@ -3,8 +3,7 @@
     <Config @limpaTudo="limpaStorage"></Config>
     <div id="todolist">
       <div id="header">
-        <h1>TODO List</h1>
-        <h5>{{timestamp}}</h5>
+        <b-img class="logo" :src="require('./assets/logo.png')"></b-img>
         <hr />
       </div>
       <div id="tarefas">
@@ -51,7 +50,6 @@ export default {
     return {
       tarefas: [],
       tarefaField: "",
-      timestamp: "",
       oldIndex: "",
       newIndex: "",
     };
@@ -130,6 +128,10 @@ export default {
 </script>
 
 <style>
+.logo {
+  height: 80px;
+  padding: 5px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

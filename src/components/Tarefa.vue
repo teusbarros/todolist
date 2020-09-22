@@ -2,7 +2,8 @@
   <div class="tarefa" :id="id">
     <input class="aCheck" v-if="!isConclued" type="checkbox" @change="concluido" />
     <input class="aCheck" v-else type="checkbox" @change="concluido" checked />
-    <strong>{{conteudo}}</strong>
+    <strong v-if="!isConclued">{{conteudo}}</strong>
+    <strong v-else><del> {{conteudo}}</del></strong>
     <f-icon class="aIcon" v-if="isConclued" icon="trash" @click="apagarTarefa" />
   </div>
 </template>
