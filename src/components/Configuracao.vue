@@ -1,14 +1,12 @@
 <template>
   <div id="config">
-    <button id="button-config" v-on:click="show = !show"><f-icon icon="cogs"></f-icon></button>
-    <transition name="fade">
-      <div class="colors" v-if="show">
-          <b-img class="img-color"  @click="changeColor(1)" left src="https://picsum.photos/125/125/?image=58" alt="Left image"></b-img>
-          <b-img class="img-color"  @click="changeColor(2)" left src="https://picsum.photos/125/125/?image=58" alt="Left image"></b-img>
-          <b-img class="img-color"  @click="changeColor(3)" left src="https://picsum.photos/125/125/?image=58" alt="Left image"></b-img>
-        <p @click="limpar">Limpar todos os dados</p>
+    <button id="button-config" v-on:click="show = !show">
+      <f-icon icon="cogs"></f-icon>
+    </button>
+    <transition name="bounce">
+      <div class="colors" v-if="show" @click="limpar">
+        <p>Apagar todos os dados</p>
       </div>
-    
     </transition>
   </div>
 </template>
@@ -18,63 +16,75 @@ export default {
   props: {
     icon: String,
   },
-  data(){
-      return{
-          show: false
-      }
+  data() {
+    return {
+      show: false,
+    };
   },
-  methods:{
-      changeColor: function(e){
-          alert(e);
-      },
-      limpar: function(e){
-          alert(e);
+  methods: {
+    limpar: function () {
+      var ok = confirm("Você deseja excluir todas as tarefas da lista?");
+      if (ok) {
+        this.$emit("limpaTudo");
       }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-p{
-    height: 25px;
-    width: auto;
-
+p {
+  height: 25px;
+  width: auto;
+  background-color: #e9e9e9;
+  border: 1px black;
+  border-style: solid;
 }
-#button-config{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    margin-top: 1px;
-    display: inline-block;
-    float: left;
+#button-config {
+  width: 30px;
+  height: 30px;
+  margin-right: 2px;
+  margin-top: 1px;
+  display: inline-block;
+  float: left;
 }
-#config{
-    display: inline-block;
-    float: left;
-    position: relative;
-    margin-top: -60px;
+#config {
+  display: inline-block;
+  float: left;
+  position: relative;
+  margin-top: -60px;
 }
-.colors{
-    background-color: #fff;
-    display: inline-block;
-    padding: 2px;
-    vertical-align: middle;
-    /* float: left; */
+.colors {
+  margin-top: 1px;
+  background-color: #e9e9e9;
+  display: inline-block;
+  padding: 2px;
+  vertical-align: middle;
 }
-.img-color{
-    cursor: pointer;
+.img-color {
+  cursor: pointer;
 }
-.colors .img-color{
-    width: 30px;
-    height: 30px;
-    margin-right: 25px;
-    display: inline-block;
-
+.colors .img-color {
+  width: 30px;
+  height: 30px;
+  margin-right: 25px;
+  display: inline-block;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

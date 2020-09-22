@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <Config></Config>
+    <Config @limpaTudo="limpaStorage"></Config>
     <div id="todolist">
       <div id="header">
         <h1>TODO List</h1>
@@ -31,7 +31,6 @@
           @keyup="adicionar"
           maxlength="60"
         />
-        
       </div>
     </div>
   </div>
@@ -74,6 +73,9 @@ export default {
     },
     apagar: function (e) {
       this.tarefas = this.tarefas.filter((tarefa) => tarefa.id != e.referencia);
+    },
+    limpaStorage: function () {
+      this.tarefas = [];
     },
     concluir: function (e) {
       const tarefasUpdated = this.tarefas;
