@@ -5,6 +5,9 @@
 ![Com tarefa](public/img/2.png?raw=true)
 ![Gif](public/img/t.gif?raw=true)
 
+## Testando
+
+Você pode ver funcionando em https://teusbarros.github.io/todolist
 
 ## Project setup
 ```
